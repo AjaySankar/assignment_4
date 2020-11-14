@@ -14,14 +14,27 @@ import {
 } from 'react-native';
 
 import Register from './screens/Register'
+import Login from './screens/Login'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <>
-      <SafeAreaView>
-        <Register/>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerTitleStyle: {
+            textAlign:'center',
+            fontWeight: 'bold',
+          },
+          headerTitleAlign: 'center'
+        }}
+      >
+        <Stack.Screen name="Login" options={{ title: 'Login' }} component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
