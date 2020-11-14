@@ -36,6 +36,8 @@ const registrationInfoSchema = yup.object({
         .min(1),
     confirmPassword: yup.string()
         .oneOf([yup.ref('password'), null], 'Passwords must match')
+        .required('Password is required')
+        .min(1)
 });
 
 const Register = () => {
