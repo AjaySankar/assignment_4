@@ -13,13 +13,13 @@ import {
   Text,
 } from 'react-native';
 
+import Register from './screens/Register'
+
 const App = () => {
   return (
     <>
       <SafeAreaView>
-        <View>
-          <Text> Hello World </Text>
-        </View>
+        <Register/>
       </SafeAreaView>
     </>
   );
