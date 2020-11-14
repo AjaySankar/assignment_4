@@ -4,9 +4,7 @@ import {
     Text, 
     TouchableOpacity, 
     TextInput,
-    StyleSheet ,
-    TouchableWithoutFeedback,
-    Keyboard,
+    StyleSheet,
     Dimensions,
     ScrollView,
     Image
@@ -52,78 +50,76 @@ const Register = () => {
     };
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.form}>
-                <Formik
-                    initialValues={defaultRegistrationInfo}
-                    validationSchema={registrationInfoSchema}
-                >
-                    {(props) => (
-                    <ScrollView>
-                        <Image source={logo} style={styles.logo} />
-                    <View>
-                        <TextInput
-                        style={styles.textInput}
-                        onChangeText={props.handleChange('firstname')}
-                        value={props.values.firstname}
-                        placeholder='First name'
-                        onBlur={props.handleBlur('firstname')}
-                        />
-                        <Text style={styles.errorText}>{ props.touched.firstname && props.errors.firstname }</Text>
-                        <TextInput
-                        style={styles.textInput}
-                        onChangeText={props.handleChange('lastname')}
-                        value={props.values.lastname}
-                        placeholder='Last name'
-                        onBlur={props.handleBlur('lastname')}
-                        />
-                        <Text style={styles.errorText}>{ props.touched.lastname && props.errors.lastname }</Text>
-                        <TextInput
-                        style={styles.textInput}
-                        onChangeText={props.handleChange('nickname')}
-                        value={props.values.nickname}
-                        placeholder='Nick name'
-                        onBlur={props.handleBlur('nickname')}
-                        />
-                        <Text style={styles.errorText}>{ props.touched.nickname && props.errors.nickname }</Text>
-                        <TextInput
-                        style={styles.textInput}
-                        onChangeText={props.handleChange('email')}
-                        value={props.values.email}
-                        placeholder='Email'
-                        onBlur={props.handleBlur('email')}
-                        />
-                        <Text style={styles.errorText}>{ props.touched.email && props.errors.email }</Text>
-                        <TextInput
-                        style={styles.textInput}
-                        onChangeText={props.handleChange('password')}
-                        value={props.values.password}
-                        placeholder='Password'
-                        onBlur={props.handleBlur('password')}
-                        secureTextEntry={true}
-                        />
-                        <Text style={styles.errorText}>{ props.touched.password && props.errors.password }</Text>
-                        <TextInput
-                        style={styles.textInput}
-                        onChangeText={props.handleChange('confirmPassword')}
-                        value={props.values.confirmPassword}
-                        placeholder='Confirm Password'
-                        onBlur={props.handleBlur('confirmPassword')}
-                        secureTextEntry={true}
-                        />
-                        <Text style={styles.errorText}>{ props.touched.confirmPassword && props.errors.confirmPassword }</Text>
-                        <TouchableOpacity
-                            style={styles.submitButtonStyle}
-                            activeOpacity = { .5 }
-                            >
-                            <Text style={styles.buttonTextStyle}> Register </Text>
-                        </TouchableOpacity>
-                    </View>
-                    </ScrollView>
-                    )}
-                </Formik>
-            </View>
-        </TouchableWithoutFeedback>
+        <View style={styles.form}>
+            <Formik
+                initialValues={defaultRegistrationInfo}
+                validationSchema={registrationInfoSchema}
+            >
+                {(props) => (
+                <ScrollView>
+                    <Image source={logo} style={styles.logo} />
+                <View>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={props.handleChange('firstname')}
+                    value={props.values.firstname}
+                    placeholder='First name'
+                    onBlur={props.handleBlur('firstname')}
+                    />
+                    <Text style={styles.errorText}>{ props.touched.firstname && props.errors.firstname }</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={props.handleChange('lastname')}
+                    value={props.values.lastname}
+                    placeholder='Last name'
+                    onBlur={props.handleBlur('lastname')}
+                    />
+                    <Text style={styles.errorText}>{ props.touched.lastname && props.errors.lastname }</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={props.handleChange('nickname')}
+                    value={props.values.nickname}
+                    placeholder='Nick name'
+                    onBlur={props.handleBlur('nickname')}
+                    />
+                    <Text style={styles.errorText}>{ props.touched.nickname && props.errors.nickname }</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={props.handleChange('email')}
+                    value={props.values.email}
+                    placeholder='Email'
+                    onBlur={props.handleBlur('email')}
+                    />
+                    <Text style={styles.errorText}>{ props.touched.email && props.errors.email }</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={props.handleChange('password')}
+                    value={props.values.password}
+                    placeholder='Password'
+                    onBlur={props.handleBlur('password')}
+                    secureTextEntry={true}
+                    />
+                    <Text style={styles.errorText}>{ props.touched.password && props.errors.password }</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={props.handleChange('confirmPassword')}
+                    value={props.values.confirmPassword}
+                    placeholder='Confirm Password'
+                    onBlur={props.handleBlur('confirmPassword')}
+                    secureTextEntry={true}
+                    />
+                    <Text style={styles.errorText}>{ props.touched.confirmPassword && props.errors.confirmPassword }</Text>
+                    <TouchableOpacity
+                        style={styles.submitButtonStyle}
+                        activeOpacity = { .5 }
+                        >
+                        <Text style={styles.buttonTextStyle}> Register </Text>
+                    </TouchableOpacity>
+                </View>
+                </ScrollView>
+                )}
+            </Formik>
+        </View>
     );
 };
 
