@@ -33,6 +33,7 @@ const App = () => {
         }}
       >
         <Stack.Screen name="Login" options={{ title: 'Login' }} component={Login} />
+        <Stack.Screen name="Register" options={{ title: 'Register' }} component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   );

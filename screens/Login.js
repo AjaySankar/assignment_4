@@ -32,7 +32,7 @@ const loginInfoSchema = yup.object({
         .min(1)
 });
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const defaultLoginInfo = {
         nickname: '',
         email: '',
@@ -84,6 +84,7 @@ const Login = () => {
                                 <TouchableOpacity
                                     style={[styles.submitButtonStyle, {backgroundColor: '#eee', borderColor: '#3b5998'}]}
                                     activeOpacity = { .5 }
+                                    onPress = {() => navigation.navigate('Register')}
                                 >
                                     <Text style={[styles.buttonTextStyle, {color: '#3b5998'}]}> Register </Text>
                                 </TouchableOpacity>
