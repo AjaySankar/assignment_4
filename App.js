@@ -7,16 +7,14 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-} from 'react-native';
+import {SafeAreaView, View, Text} from 'react-native';
 
-import Register from './screens/Register'
-import Login from './screens/Login'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import Register from './screens/Register';
+import Login from './screens/Login';
+import Dashboard from './screens/Dashboard';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
@@ -26,14 +24,26 @@ const App = () => {
       <Stack.Navigator
         screenOptions={{
           headerTitleStyle: {
-            textAlign:'center',
+            textAlign: 'center',
             fontWeight: 'bold',
           },
-          headerTitleAlign: 'center'
-        }}
-      >
-        <Stack.Screen name="Login" options={{ title: 'Login' }} component={Login} />
-        <Stack.Screen name="Register" options={{ title: 'Register' }} component={Register} />
+          headerTitleAlign: 'center',
+        }}>
+        <Stack.Screen
+          name="Login"
+          options={{title: 'Login'}}
+          component={Login}
+        />
+        <Stack.Screen
+          name="Register"
+          options={{title: 'Register'}}
+          component={Register}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          options={{title: 'Dashboard'}}
+          component={Dashboard}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -39,7 +39,7 @@ const registrationInfoSchema = yup.object({
     .min(1),
 });
 
-const Register = () => {
+const Register = ({navigation}) => {
   const defaultRegistrationInfo = {
     firstname: '',
     lastname: '',
@@ -80,6 +80,7 @@ const Register = () => {
           updateRequestState(RequestStates.RequestSuccessful);
           User.updateProfile(nickname, email, password);
           saveUserLoginCredentials({nickname, email, password});
+          navigation.navigate('Dashboard');
         } else {
           Snackbar.show({
             text: `${response.message || 'Failed to register'} Try again.. `,

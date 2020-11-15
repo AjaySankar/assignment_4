@@ -84,6 +84,7 @@ const Login = ({navigation}) => {
           updateRequestState(RequestStates.RequestSuccessful);
           User.updateProfile(nickname, email, password);
           saveUserLoginCredentials({nickname, email, password});
+          navigation.navigate('Dashboard');
         } else {
           Snackbar.show({
             text: 'Invalid credentials.. Try again',
