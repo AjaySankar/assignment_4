@@ -12,12 +12,14 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import logo from '../logo.png';
 import Snackbar from 'react-native-snackbar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LoginRequestHandle from '../network/login';
 import RequestStates from '../utils/requestStateEnums';
@@ -25,6 +27,7 @@ import User from '../models/User';
 
 const window = Dimensions.get('window');
 const IMAGE_HEIGHT = window.width / 4;
+const LoginInfoStorageKey = 'InstaPost-LoginInfo';
 
 const loginInfoSchema = yup.object({
   nickname: yup.string().required('Nick name is required').min(1),
@@ -39,12 +42,36 @@ const Login = ({navigation}) => {
     password: '',
   };
 
+  const [initialFormData, setInitFormData] = React.useState(defaultLoginInfo);
+
   const [requestState, updateRequestState] = React.useState(
     RequestStates.NotRequested,
   );
 
+  const saveUserLoginCredentials = async (loginInfo) => {
+    try {
+      await AsyncStorage.setItem(
+        LoginInfoStorageKey,
+        JSON.stringify(loginInfo),
+      );
+      // Alert.alert('Saved personal info!!');
+    } catch (e) {
+      Alert.alert('Failed to store personal info!!');
+    }
+  };
+
+  React.useEffect(() => {
+    try {
+      AsyncStorage.getItem(LoginInfoStorageKey).then((loginInfo) => {
+        setInitFormData({...defaultLoginInfo, ...JSON.parse(loginInfo)});
+      });
+    } catch {
+      Alert('Failed to read saved login credentials');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onLogin = ({nickname, email, password}, isValid) => {
-    console.log(isValid);
     if (!isValid) {
       return;
     }
@@ -56,6 +83,7 @@ const Login = ({navigation}) => {
         if (response.status) {
           updateRequestState(RequestStates.RequestSuccessful);
           User.updateProfile(nickname, email, password);
+          saveUserLoginCredentials({nickname, email, password});
         } else {
           Snackbar.show({
             text: 'Invalid credentials.. Try again',
@@ -74,7 +102,8 @@ const Login = ({navigation}) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.form}>
         <Formik
-          initialValues={defaultLoginInfo}
+          enableReinitialize={true}
+          initialValues={initialFormData}
           validationSchema={loginInfoSchema}>
           {(props) => (
             <ScrollView>
