@@ -76,7 +76,7 @@ const Login = ({navigation}) => {
       return;
     }
     updateRequestState(RequestStates.RequestInProcess);
-    new LoginRequestHandle(updateRequestState)
+    new LoginRequestHandle()
       .login(email, password)
       .then((response) => {
         // console.log(`Success ${JSON.stringify(response)}`);
