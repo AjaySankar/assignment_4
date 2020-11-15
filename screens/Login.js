@@ -17,6 +17,7 @@ import {
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import logo from '../logo.png';
+import Snackbar from 'react-native-snackbar';
 
 import LoginRequestHandle from '../network/login';
 import RequestStates from '../utils/requestStateEnums';
@@ -51,11 +52,15 @@ const Login = ({navigation}) => {
     new LoginRequestHandle(updateRequestState)
       .login(email, password)
       .then((response) => {
-        console.log(`Success ${JSON.stringify(response)}`);
+        // console.log(`Success ${JSON.stringify(response)}`);
         if (response.status) {
           updateRequestState(RequestStates.RequestSuccessful);
           User.updateProfile(nickname, email, password);
         } else {
+          Snackbar.show({
+            text: 'Invalid credentials.. Try again',
+            duration: Snackbar.LENGTH_LONG,
+          });
           updateRequestState(RequestStates.RequestFailed);
         }
       })
