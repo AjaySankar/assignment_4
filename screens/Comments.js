@@ -14,8 +14,10 @@ const Comments = () => {
   return (
     <>
       <TextInput
-        mode="outlined"
         label="Add a comment"
+        style={{
+          backgroundColor: '#fff',
+        }}
         right={
           <TextInput.Icon name="comment-plus-outline" onPress={() => {}} />
         }
