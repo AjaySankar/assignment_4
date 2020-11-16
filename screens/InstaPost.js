@@ -21,7 +21,7 @@ const InstaPost = () => {
 
 const HashTags = () => {
   return (
-    <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+    <View style={styles.hashtags}>
       {['#abc', '#def', '#ghi', '#jkl'].map((hashtag, index) => (
         <Text key={index} style={{color: '#4267B2'}}>
           {hashtag}
@@ -33,7 +33,7 @@ const HashTags = () => {
 
 const PostDescription = () => {
   return (
-    <Text style={{marginVertical: 10, textAlign: 'center'}}>
+    <Text style={styles.postDescription}>
       This is the long post description.
     </Text>
   );
@@ -42,6 +42,15 @@ const PostDescription = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  hashtags: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 10,
+  },
+  postDescription: {
+    marginVertical: 10,
+    textAlign: 'center',
   },
 });
 
