@@ -1,17 +1,31 @@
-import Collapsible from 'react-native-collapsible';
 import React from 'react';
 
-import {View, Text, StyleSheet} from 'react-native';
+// There is some require
+import ListItem from 'react-native-paper/lib/commonjs/components/List/ListItem';
+import Divider from 'react-native-paper/lib/commonjs/components/Divider';
+import ListAccordion from 'react-native-paper/lib/commonjs/components/List/ListAccordion';
+
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 
 const Comments = () => {
+  const comments = ['Comments 1', 'Comments 2', 'Comments 3'];
   return (
-    <Collapsible collapsed={false} align="center" style={styles.container}>
-      <View>
-        <Text> Comments 1 </Text>
-        <Text> Comments 2 </Text>
-        <Text> Comments 3 </Text>
-      </View>
-    </Collapsible>
+    <>
+      <TextInput
+        placeholder="Add a comment"
+        style={{
+          paddingHorizontal: 15,
+          marginTop: 50,
+          borderBottomWidth: 0.5,
+          marginHorizontal: 10,
+        }}
+      />
+      <ListAccordion title="Load for comments">
+        <ListItem title="First item" />
+        <Divider />
+        <ListItem title="Second item" />
+      </ListAccordion>
+    </>
   );
 };
 
