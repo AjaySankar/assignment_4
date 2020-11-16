@@ -10,7 +10,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {StyleSheet} from 'react-native';
 
 const Comments = () => {
-  const comments = ['Comments 1', 'Comments 2', 'Comments 3'];
+  const [comments, addComment] = React.useState([
+    'Comments 1',
+    'Comments 2',
+    'Comments 3',
+  ]);
+  const [newComment, setComment] = React.useState('');
+
   return (
     <>
       <TextInput
@@ -18,8 +24,16 @@ const Comments = () => {
         style={{
           backgroundColor: '#fff',
         }}
+        value={newComment}
+        onChangeText={(text) => setComment(text)}
         right={
-          <TextInput.Icon name="comment-plus-outline" onPress={() => {}} />
+          <TextInput.Icon
+            name="comment-plus-outline"
+            onPress={() => {
+              addComment([...comments, newComment]);
+              setComment('');
+            }}
+          />
         }
       />
       <ListAccordion
