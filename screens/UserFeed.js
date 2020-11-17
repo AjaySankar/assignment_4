@@ -10,42 +10,36 @@ import {
 } from 'react-native';
 import InstaPost from './InstaPost';
 
+import GetFriendPostsRequest from '../network/getFriendPosts';
+import User from '../models/User';
+
 const UserFeed = () => {
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    },
-    {
-      id: '202cb962ac59075b964b07152d234b70',
-    },
-    {
-      id: '250cf8b51c773f3f8dc8b4be867a9a02',
-    },
-    {
-      id: '68053af2923e00204c3ca7c6a3150cf7',
-    },
-    {
-      id: '13f9896df61279c928f19721878fac41',
-    },
-    {
-      id: '0d7de1aca9299fe63f3e0041f02638a3',
-    },
-  ];
+  // const feedPostIds = ['870'];
+  const [feedPostIds, updatePostIds] = React.useState(['870']);
 
-  const renderItem = ({item}) => <InstaPost key={item.id} id={item.id} />;
+  React.useEffect(() => {
+    new GetFriendPostsRequest()
+      .fetchPosts(User.getNickName())
+      .then((response) => {
+        if (
+          response &&
+          response.status &&
+          response.body &&
+          response.body.ids &&
+          response.body.ids.length > 0
+        ) {
+          updatePostIds([...response.body.ids]);
+        }
+      });
+  }, []);
 
+  const renderItem = ({item}) => <InstaPost key={item} postId={item} />;
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={feedPostIds}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item)}
       />
     </SafeAreaView>
   );

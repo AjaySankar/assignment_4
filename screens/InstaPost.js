@@ -12,14 +12,14 @@ import Comments from './Comments';
 import Post from '../post/post';
 import RequestStates from '../utils/requestStateEnums';
 
-const InstaPost = () => {
+const InstaPost = ({postId}) => {
   const [postState, initPost] = React.useState(Post.getEmptyPost());
   const [requestState, updatePostRequestState] = React.useState(
     RequestStates.RequestInProcess,
   );
 
   React.useEffect(() => {
-    new GetPostHandle().fetchPost(870).then((response) => {
+    new GetPostHandle().fetchPost(postId).then((response) => {
       if (
         response &&
         response.status &&
