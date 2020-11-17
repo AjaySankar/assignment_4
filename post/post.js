@@ -12,7 +12,7 @@ export default class Post {
   }
 
   static getEmptyPost() {
-    return new Post(0, 0, 'default', ['#abc'], ['Comment 1']);
+    return new Post(0, 0, '', [], []);
   }
 
   get id() {
