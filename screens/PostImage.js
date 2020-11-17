@@ -36,7 +36,7 @@ const PostImage = ({imageId}) => {
         updatePostRequestState(RequestStates.RequestFailed);
       }
     });
-  });
+  }, []);
 
   let imageComponent;
   switch (requestState) {
