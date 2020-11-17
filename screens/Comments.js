@@ -9,9 +9,23 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {StyleSheet} from 'react-native';
 
+import CommentPostHandle from '../network/addComment';
+
 const Comments = ({postId, comments: initComments}) => {
   const [comments, addComment] = React.useState(initComments);
   const [newComment, setComment] = React.useState('');
+
+  const onUserComment = () => {
+    new CommentPostHandle()
+      .commentOnPost(postId, newComment)
+      .then((response) => {
+        const {status} = response;
+        if (status) {
+          addComment([...comments, newComment]);
+          setComment('');
+        }
+      });
+  };
 
   return (
     <>
@@ -23,13 +37,7 @@ const Comments = ({postId, comments: initComments}) => {
         value={newComment}
         onChangeText={(text) => setComment(text)}
         right={
-          <TextInput.Icon
-            name="comment-plus-outline"
-            onPress={() => {
-              addComment([...comments, newComment]);
-              setComment('');
-            }}
-          />
+          <TextInput.Icon name="comment-plus-outline" onPress={onUserComment} />
         }
       />
       <ListAccordion
