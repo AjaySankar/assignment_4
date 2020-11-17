@@ -1,7 +1,7 @@
 import React from 'react';
 import {AirbnbRating} from 'react-native-ratings';
 
-const RatingStars = () => {
+const RatingStars = ({postId}) => {
   const [rating, setPostRating] = React.useState(0);
 
   return (

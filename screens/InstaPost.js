@@ -6,23 +6,25 @@ import {Card} from 'react-native-elements';
 import RatingStars from './RatingStars';
 import PostImage from './PostImage';
 import Comments from './Comments';
+import Post from '../post/post';
 
 const InstaPost = () => {
+  const [postState, initPost] = React.useState(Post.getEmptyPost());
   return (
     <Card containerStyle={styles.container}>
-      <PostImage />
-      <PostDescription />
-      <HashTags />
-      <RatingStars />
-      <Comments />
+      <PostImage imageId={postState.image} />
+      <PostDescription description={postState.description} />
+      <HashTags hashtags={postState.hashTags} />
+      <RatingStars postId={postState.id} />
+      <Comments postId={postState.id} comments={postState.comments} />
     </Card>
   );
 };
 
-const HashTags = () => {
+const HashTags = ({hashtags}) => {
   return (
     <View style={styles.hashtags}>
-      {['#abc', '#def', '#ghi', '#jkl'].map((hashtag, index) => (
+      {hashtags.map((hashtag, index) => (
         <Text key={index} style={{color: '#4267B2'}}>
           {hashtag}
         </Text>
@@ -31,12 +33,8 @@ const HashTags = () => {
   );
 };
 
-const PostDescription = () => {
-  return (
-    <Text style={styles.postDescription}>
-      This is the long post description.
-    </Text>
-  );
+const PostDescription = ({description}) => {
+  return <Text style={styles.postDescription}>{description}</Text>;
 };
 
 const styles = StyleSheet.create({

@@ -9,12 +9,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {StyleSheet} from 'react-native';
 
-const Comments = () => {
-  const [comments, addComment] = React.useState([
-    'Comments 1',
-    'Comments 2',
-    'Comments 3',
-  ]);
+const Comments = ({postId, comments: initComments}) => {
+  const [comments, addComment] = React.useState(initComments);
   const [newComment, setComment] = React.useState('');
 
   return (
