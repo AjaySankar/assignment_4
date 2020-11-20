@@ -15,6 +15,7 @@ const PostImage = ({imageId}) => {
   );
 
   React.useEffect(() => {
+    let isSubscribed = true;
     if (imageId <= 0) {
       updatePostRequestState(RequestStates.RequestSuccessful);
       return;
@@ -30,12 +31,17 @@ const PostImage = ({imageId}) => {
         const {
           body: {image},
         } = response;
-        setEncodedImage(`data:image/jpeg;base64,${image}`);
-        updatePostRequestState(RequestStates.RequestSuccessful);
+        if (isSubscribed) {
+          setEncodedImage(`data:image/jpeg;base64,${image}`);
+          updatePostRequestState(RequestStates.RequestSuccessful);
+        }
       } else {
-        updatePostRequestState(RequestStates.RequestFailed);
+        if (isSubscribed) {
+          updatePostRequestState(RequestStates.RequestFailed);
+        }
       }
     });
+    return () => (isSubscribed = false);
   }, []);
 
   let imageComponent;

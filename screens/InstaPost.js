@@ -19,6 +19,7 @@ const InstaPost = ({postId}) => {
   );
 
   React.useEffect(() => {
+    let isSubscribed = true;
     new GetPostHandle().fetchPost(postId).then((response) => {
       if (
         response &&
@@ -32,12 +33,17 @@ const InstaPost = ({postId}) => {
             post: {id, image, text, hashtags, comments},
           },
         } = response;
-        initPost(new Post(id, image, text, hashtags, comments));
-        updatePostRequestState(RequestStates.RequestSuccessful);
+        if (isSubscribed) {
+          initPost(new Post(id, image, text, hashtags, comments));
+          updatePostRequestState(RequestStates.RequestSuccessful);
+        }
       } else {
-        updatePostRequestState(RequestStates.RequestFailed);
+        if (isSubscribed) {
+          updatePostRequestState(RequestStates.RequestFailed);
+        }
       }
     });
+    return () => (isSubscribed = false);
   }, []);
 
   let postComponent;
@@ -52,6 +58,7 @@ const InstaPost = ({postId}) => {
     case RequestStates.RequestSuccessful:
       postComponent = (
         <Card containerStyle={styles.container}>
+          <Text>{postState.id}</Text>
           <PostImage imageId={postState.image} />
           <PostDescription description={postState.description} />
           <HashTags hashtags={postState.hashTags} />
